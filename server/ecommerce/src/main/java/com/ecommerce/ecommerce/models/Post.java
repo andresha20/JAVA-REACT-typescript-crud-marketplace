@@ -18,6 +18,7 @@ public class Post {
     private String model;
     private String postName;
     private String color;
+    private String imgUrl;
     private Number transmission;
     private Number brand;
     private Number category;
