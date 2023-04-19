@@ -29,7 +29,6 @@ const routes: RouteObject[] = [
       },
     ],
   },
-
   {
     path: '*',
     element: <MainLayout />,

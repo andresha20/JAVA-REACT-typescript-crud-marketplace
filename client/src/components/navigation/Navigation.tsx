@@ -7,13 +7,17 @@ export interface IAppProps {
 const menuItems = ['Inicio', 'Catálogo', 'Contacto']
 
 const Navigation: React.FunctionComponent<IAppProps> = ({ color }) => <aside>
-    <div className='bg-primary-default w-full border-b border-orange-200 h-16'>
-        <div>
-            {menuItems.map((item, i) => (
-                <p key={i}>{item}</p>
-            ))}
-        </div>
-    </div>
+    <header>
+        <nav className='bg-primary-default w-full shadow-b p-3'>
+            <div className='max-w-screen-md mx-auto flex justify-between items-center'>
+                <div className='font-bold flex space-x-10 items-center'>
+                    {menuItems.map((item, i) => (
+                        <p key={i} className='text-white'>{item}</p>
+                    ))}
+                </div>
+            </div>
+        </nav>
+    </header>
 </aside>
 
 export default Navigation;
