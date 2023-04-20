@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { SwiperSlide } from 'swiper/react';
 import Carousel from '../components/global/Carousel';
+import CatalogCarousel from '../components/global/CatalogCarousel';
 
 const Home = () => {
 
@@ -55,7 +56,7 @@ const Home = () => {
                 <div className='py-5'>
                     <Carousel>
                         {brands.map((brand, i) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={i}>
                                 <div className='flex flex-col items-center space-y-3'>
                                     <div className='h-32'>
                                         <img src={brand.logo} height={100} width={100}/>
@@ -69,7 +70,7 @@ const Home = () => {
             </div>
             <h1 className='text-center font-bold'>Catalog</h1>
             <div>
-
+                <CatalogCarousel />
             </div>
         </div>
     </div>;
