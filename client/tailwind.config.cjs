@@ -13,6 +13,8 @@ module.exports = {
       yellow: colors.amber,
       purple: colors.violet,
       white: colors.white,
+      indigo: colors.indigo,
+      blue: colors.blue,
       red: colors.red,
       yellow: colors.yellow,
       black: colors.black,
@@ -22,13 +24,15 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       primary: {
-        default: '#F0A830',
+        default: '#00b4d8',
       },
       secondary: {
         default: '#FCEBB6',
       },
     },
-    extend: {},
+    extend: {
+      
+    },  
   },
   plugins: [],
 }

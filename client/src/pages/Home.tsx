@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { SwiperSlide } from 'swiper/react';
 import Carousel from '../components/global/Carousel';
 import CatalogCarousel from '../components/global/CatalogCarousel';
+import Filter from '../components/global/Filter';
 
 const Home = () => {
 
@@ -29,13 +30,15 @@ const Home = () => {
         { name: 'Toyota', logo: `/images/toyota.png` },
     ]
 
-    return <div className='bg-orange-100'>
-        <div className='bg-black h-96 w-full'>
-            <p>test</p>
+    return <div className='bg-blue-50'>
+        <div className="bg-black relative h-96 w-full bg-[url('/images/banner.jpg')] object-fill bg-fixed bg-auto bg-top bg-no-repeat">
+            <div className='absolute top-1/2 left-1/2 transform w-4/6 -translate-x-1/2 p-5 -translate-y-1/2 bg-white rounded-xl'>
+                <Filter/>
+            </div>
         </div>
-        <div className='max-w-screen-lg shadow bg-white space-y-5 md:space-y-20 mx-auto p-5 md:p-10'>
+        <div className='max-w-screen-lg shadow bg-white space-y-5 md:space-y-20 mx-auto rounded p-5 md:p-10'>
             <div className=''>
-                <h1 className='text-center font-bold'>Categories</h1>
+                <h1 className='text-center font-bold'>Categorías</h1>
                 <div className='grid grid-cols-1 my-10 md:grid-cols-2 lg:grid-cols-4 gap-10'>
                     <div>
                         <img className='cursor-pointer transform transition-all hover:scale-105' onClick={() => redirectTo(1, 1)} src='/images/category1.png'/>
@@ -52,7 +55,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='bg-gray-100 '>
-                <h1 className='text-center font-bold'>Brands</h1>
+                <h1 className='text-center font-bold'>Marcas</h1>
                 <div className='py-5'>
                     <Carousel>
                         {brands.map((brand, i) => (
@@ -68,7 +71,7 @@ const Home = () => {
                     </Carousel>
                 </div>
             </div>
-            <h1 className='text-center font-bold'>Catalog</h1>
+            <h1 className='text-center font-bold'>Catálogo</h1>
             <div>
                 <CatalogCarousel />
             </div>

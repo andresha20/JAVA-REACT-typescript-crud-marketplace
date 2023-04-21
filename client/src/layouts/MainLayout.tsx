@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navigation from '../components/navigation/Navigation';
+import Footer from '../components/global/Footer';
 
 export interface MainLayout {
     children?: React.ReactNode,
@@ -10,6 +11,7 @@ export interface MainLayout {
 const MainLayout: React.FunctionComponent<MainLayout> = ({ id = 'sdsdsd', children }) => <aside id={id}>
     <Navigation/>
     {children || <Outlet/>}
+    <Footer />
 </aside>
 
 export default MainLayout;
