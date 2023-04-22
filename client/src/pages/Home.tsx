@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { SwiperSlide } from 'swiper/react';
+import { brands } from '../utils/general';
 import Carousel from '../components/global/Carousel';
 import CatalogCarousel from '../components/global/CatalogCarousel';
 import Filter from '../components/global/Filter';
@@ -24,11 +25,7 @@ const Home = () => {
         }
     }
 
-    const brands = [
-        { name: 'Audi', logo: `/images/audi.png` },
-        { name: 'BMW', logo: `/images/bmw.png` },
-        { name: 'Toyota', logo: `/images/toyota.png` },
-    ]
+
 
     return <div className='bg-blue-50'>
         <div className="bg-black relative h-96 w-full bg-[url('/images/banner.jpg')] object-fill bg-fixed bg-auto bg-top bg-no-repeat">

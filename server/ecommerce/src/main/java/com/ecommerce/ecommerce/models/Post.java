@@ -31,10 +31,11 @@ public class Post {
     private Number mileageType;
     private Number cylinders;
     private Number appraisal;
-    private Number negotiable;
-
-
+    
+    
     @NotNull
+    private Boolean negotiable;
+    private Boolean exchange;
     private Boolean bulletproof;
 
     @NotEmpty

@@ -10,7 +10,9 @@ export interface MainLayout {
 
 const MainLayout: React.FunctionComponent<MainLayout> = ({ id = 'sdsdsd', children }) => <aside id={id}>
     <Navigation/>
-    {children || <Outlet/>}
+    <div className='min-h-screen'>
+        {children || <Outlet/>}
+    </div>
     <Footer />
 </aside>
 

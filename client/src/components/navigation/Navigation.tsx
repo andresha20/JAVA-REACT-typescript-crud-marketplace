@@ -1,26 +1,28 @@
 import { useNavigate } from 'react-router-dom';
+import { menuItems } from '../../utils/general';
 import * as React from 'react';
 import Button from '../global/Button';
-
 export interface IAppProps {
     color?: string,
 }
 
-const menuItems = ['Inicio', 'Catálogo']
-
 const Navigation: React.FunctionComponent<IAppProps> = ({ color }) => {
 
+    const navigate = useNavigate();
+
     const redirectTo = (id: number) => {
-        const navigate = useNavigate();
         switch (id) {
-            case 1:
+            case 0:
                 navigate(`/`)
+                console.log('test')
+                break;
+            case 1:
+                navigate(`/catalog`)
+                console.log('test')
                 break;
             case 2:
-                navigate(`/catalog`)
-                break;
-            case 3:
                 navigate(`/publish`)
+                console.log('test')
                 break;
             default:
                 break;
