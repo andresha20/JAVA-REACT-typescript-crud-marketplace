@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Posts extends MongoRepository<Post, String> {
     public List<Post> findByCategory(Number category);
-    public List<Post> findByStatus(Number status);
+    public List<Post> findByCondition(Number condition);
     public List<Post> findByYear(Number year);
     public Post findByBrand(Number brand);
 

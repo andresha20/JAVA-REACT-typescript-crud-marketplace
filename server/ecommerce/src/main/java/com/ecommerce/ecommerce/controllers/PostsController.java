@@ -40,8 +40,8 @@ public class PostsController {
                     case "category":
                         postsRepository.findByCategory(Integer.parseInt(value));
                         break;
-                    case "status":
-                        postsRepository.findByStatus(Integer.parseInt(value));
+                    case "condition":
+                        postsRepository.findByCondition(Integer.parseInt(value));
                         break;
                     case "year":
                         postsRepository.findByYear(Integer.parseInt(value));

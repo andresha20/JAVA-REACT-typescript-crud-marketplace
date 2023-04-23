@@ -25,12 +25,12 @@ public class Post {
     private Number category;
     private Number year;
     private Number price;
-    private Number status;
     private Number mileage;
     private Number fuelType;
     private Number mileageType;
     private Number cylinders;
     private Number appraisal;
+    private Number condition;
     
     
     @NotNull

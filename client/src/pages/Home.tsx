@@ -61,7 +61,7 @@ const Home = () => {
                                     <div className='h-32'>
                                         <img src={brand.logo} height={100} width={100}/>
                                     </div>
-                                    <p onClick={() => redirectTo(2, i)} className='font-bold text-orange-500 underline cursor-pointer hover:text-gray-900 transition-all'>{brand.name}</p>
+                                    <p onClick={() => redirectTo(2, i+1)} className='font-bold text-orange-500 underline cursor-pointer hover:text-gray-900 transition-all'>{brand.name}</p>
                                 </div>
                             </SwiperSlide>
                         ))}

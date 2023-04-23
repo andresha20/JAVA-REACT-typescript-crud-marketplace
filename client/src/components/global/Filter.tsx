@@ -7,7 +7,7 @@ export interface IAppProps {
 }
 
 type FormData = {
-    type: number;
+    brand: number;
     model?: string;
     exchange: boolean;
     negotiable: boolean;
@@ -42,11 +42,11 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
 
     const submit = () => {
         const properties = getValues();
-        let params: any = {};
+        let params: any = { brand: 1 };
         if (Object.keys(properties).length == 0) return false;
         Object.keys(properties).map((el) => {
             switch (el) {
-                case 'type':
+                case 'brand':
                     params[el] = properties[el];
                     break;
                 case 'model':
@@ -73,10 +73,6 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
         return navigate(`/catalog?${searchParams}`);
     }
 
-    React.useEffect(() => {
-        console.log(errors)
-    }, [errors])
-
     return <aside>
         <form onSubmit={handleSubmit(() => submit())} className='space-y-5 select-none'>
             <div className='flex space-x-2 w-full'>
@@ -84,18 +80,14 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
                     <label className='font-bold'>Marca</label>
                     <div className='w-full'>
                         <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                            setValue("type", parseInt(e.target.value))
-                            console.log(e.target.value)
-                        }} className="w-full px-3 py-2 bg-white border border-gray-500 rounded-md text-sm shadow-sm placeholder-primary-default-400
+                            setValue("brand", parseInt(e.target.value))
+                        }} className="cursor-pointer w-full px-3 py-2 bg-white border border-gray-500 rounded-md text-sm shadow-sm placeholder-primary-default-400
                         focus:outline-none focus:border-primary-default focus:ring-1 focus:ring-primary-default
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-red-700 invalid:text-red-600
                         focus:invalid:border-red-700 focus:invalid:ring-red-500">
                         {models.map((el: any, i: number) => (
-                            <option onClick={() => {
-                                setValue('type', i)
-                                console.log('ran')
-                            }} value={i+1} key={i}>{el.name}</option>
+                            <option value={i+1} key={i}>{el.name}</option>
                         ))}
                         </select>
                     </div>
