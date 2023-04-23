@@ -2,6 +2,7 @@ import { filters } from '../utils/general';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as React from 'react';
 import PostsFeed from '../components/post/PostsFeed';
+import Header from '../components/global/Header';
 
 const Catalog = () => {
 
@@ -30,10 +31,11 @@ const Catalog = () => {
     }, [routerQuery])
 
     return <div>
+        <Header title='Catálogo'/>
         <div className="bg-black relative h-96 w-full bg-[url('/images/catalog-banner.png')] object-fill bg-fixed bg-auto bg-top bg-no-repeat">
-            <div className='absolute flex space-x-3 top-1/2 left-1/2 transform w-4/6 -translate-x-1/2 -translate-y-1/2'>
+            <div className='absolute flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 top-1/2 left-1/2 transform w-4/6 -translate-x-1/2 -translate-y-1/2'>
                 {Object.keys(Object.fromEntries(routerQuery)).map((q, i) => (
-                    <div onClick={() => removeQuery(q)} title='Quitar filtro' key={i} className='flex justify-between bg-white cursor-pointer hover:text-white transition-all hover:bg-red-500 rounded p-3'>
+                    <div onClick={() => removeQuery(q)} title='Quitar filtro' key={i} className='flex justify-between bg-white cursor-pointer hover:text-white transition-all hover:bg-red-500 rounded-lg p-3'>
                         <div>
                             <p className='text-sm'>{filters?.[filters.findIndex(el => el.name == q)]?.label}</p>
                             <p className='font-bold text-xl'>{filters?.[filters.findIndex(el => el.name == q)]?.options?.[filters?.[filters.findIndex(el => el.name == q)]?.options?.findIndex(opt => opt.value.toString() == routerQuery.get(q))]?.label}</p>
@@ -44,12 +46,12 @@ const Catalog = () => {
                 ))}
             </div>
         </div>
-        <div className='flex'>
-            <div className='text-2xl whitespace-nowrap font-bold bg-primary-default flex justify-center items-center text-white py-5 px-40'>
+        <div className='block md:flex'>
+            <div className='text-lg md:text-2xl whitespace-nowrap font-bold bg-primary-default flex justify-center items-center text-white py-5 px-40'>
                 <p>Filtrar ({Object.keys(Object.fromEntries(routerQuery)).length})</p>
             </div>
             <div className='bg-gray-300 w-full p-5'>
-                <div className='w-full flex space-x-5'>
+                <div className='w-full block md:flex md:space-x-5'>
                     {filters.map((filter, i) => (
                         <div key={i} className='space-y-2'>
                             <label className='font-bold'>{filter.label}</label>

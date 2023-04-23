@@ -13,7 +13,7 @@ const Post: React.FunctionComponent<IAppProps> = ({ postData }) => {
 
     const redirectTo = (data: any) => {
         let { postName, id } = data;
-        navigate(`/catalog/${id}?post=${postName}`)
+        navigate(`/catalog/post?id=${id}&name=${postName}`)
     }
 
     return <aside>

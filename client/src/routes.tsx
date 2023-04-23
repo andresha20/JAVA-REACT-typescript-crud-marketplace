@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import Loading from './components/global/Loading';
 import type { RouteObject } from 'react-router';
 import MainLayout from './layouts/MainLayout';
+import SingleVehicle from './pages/SingleVehicle';
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -26,6 +27,10 @@ const routes: RouteObject[] = [
       {
         path: 'catalog',
         element: <Catalog />,
+      },
+      {
+        path: 'catalog/post',
+        element: <SingleVehicle />,
       },
     ],
   },

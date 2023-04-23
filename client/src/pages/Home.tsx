@@ -5,6 +5,7 @@ import { brands } from '../utils/general';
 import Carousel from '../components/global/Carousel';
 import CatalogCarousel from '../components/global/CatalogCarousel';
 import Filter from '../components/global/Filter';
+import Header from '../components/global/Header';
 
 const Home = () => {
 
@@ -28,6 +29,7 @@ const Home = () => {
 
 
     return <div className='bg-blue-50'>
+        <Header title='Inicio'/>
         <div className="bg-black relative h-96 w-full bg-[url('/images/banner.jpg')] object-fill bg-fixed bg-auto bg-top bg-no-repeat">
             <div className='absolute top-1/2 left-1/2 transform w-4/6 -translate-x-1/2 p-5 -translate-y-1/2 bg-white rounded-xl'>
                 <Filter/>
