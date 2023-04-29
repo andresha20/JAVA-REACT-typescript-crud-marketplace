@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr'
 import fetcher from '../../utils/fetcher';
 import Loading from './Loading';
+import Post from '../post/Post';
 
 export interface IAppProps {
     color?: string,
@@ -46,11 +47,9 @@ const CatalogCarousel: React.FunctionComponent<IAppProps> = ({ color }) => {
             :
             <Carousel>
                 {cars.map((car: any, i: number) => (
-                    <SwiperSlide key={i}>
-                        <div className='space-y-3'>
-                            <p className='text-lg'>{car.postName}</p>
-                            <h2 className='font-bold'>${car?.price || '0'}</h2>
-                            <p>{car.year} - {car.location}</p>
+                    <SwiperSlide key={car.id}>
+                        <div>
+                            <Post postData={car}/>
                         </div>
                     </SwiperSlide>
                 ))}

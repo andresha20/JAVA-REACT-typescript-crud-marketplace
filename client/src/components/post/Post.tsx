@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export interface IAppProps {
     postData?: any,
+    key?: any,
 }
 
 const Post: React.FunctionComponent<IAppProps> = ({ postData }) => {
@@ -16,22 +17,22 @@ const Post: React.FunctionComponent<IAppProps> = ({ postData }) => {
         navigate(`/catalog/post?id=${id}&name=${postName}`)
     }
 
-    return <aside>
-        <div onClick={() => redirectTo(postData)} className='p-3 rounded shadow border border-gray-100'>
-            <div className='relative'>
-                <img src={postData.imgUrl}/>
+    return <aside onClick={() => redirectTo(postData)} className='grid grid-cols-1 p-3 rounded shadow border border-gray-100'>
+            <div className='relative flex flex-col items-center'>
+                <img src={postData?.imgUrl || '/images/noimage.jpg'} width={500} height={500}/>
                 <p className='bg-opacity-80 text-white p-3 font-bold'>
                     $ {postData.price}
                 </p>
             </div>
-            <p>{postData.postName}</p>
-            <p>{postData.model}</p>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
-                <p><FontAwesomeIcon title='Kilometraje' icon={faGauge} className='h-5 w-5 mr-2'/>{postData.mileage}</p>
-                <p><FontAwesomeIcon title='Combustible' icon={faGasPump} className='h-5 w-5 mr-2'/>{postData.fuelType == 1 ? 'Gasolina' : (postData.fuelType == 2 ? 'Diesel' : (postData.fuelType == 3 ? 'Eléctrico' : 'Híbrido'))}</p>
-                <p><FontAwesomeIcon title='Combustible' icon={faLocationDot} className='h-5 w-5 mr-2'/>{postData.location}</p>
+            <div>
+                <p onClick={() => redirectTo(postData)} className='cursor-pointer hover:text-blue-500 transition-all transform hover:scale-105 font-bold text-xl text-center'>{postData.postName}</p>
+                <p className='text-center flex-1'>{postData.model}</p>
             </div>
-        </div>
+            <div className='text-sm text-gray-500 mt-5 space-y-2 flex-1'>
+                <p><FontAwesomeIcon title='Kilometraje' icon={faGauge} className='h-5 w-5 mr-2'/>{postData.mileage} {postData.mileageType == 2 ? 'millas' : 'KM'}</p>
+                <p><FontAwesomeIcon title='Combustible' icon={faGasPump} className='h-5 w-5 mr-2'/>{postData.fuelType == 1 ? 'Gasolina' : (postData.fuelType == 2 ? 'Diesel' : (postData.fuelType == 3 ? 'Eléctrico' : 'Híbrido'))}</p>
+                <p><FontAwesomeIcon title='Combustible' icon={faLocationDot} className='h-5 w-5 mr-2'/>{postData?.location || 'Sin ubicación'}</p>
+            </div>
     </aside>
 }
 

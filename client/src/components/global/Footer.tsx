@@ -16,6 +16,7 @@ const Footer: React.FunctionComponent<IAppProps> = ({ color }) => <aside>
             <div className='text-white text-center'>
                 <b>Stack:</b>
                 <p>React</p>
+                <p>Typescript</p>
                 <p>Java (Spring Boot)</p>
                 <p>MongoDB</p>
             </div>

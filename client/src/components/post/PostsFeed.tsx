@@ -23,11 +23,9 @@ const PostsFeed: React.FC<IAppProps> = ({}) => {
     }
 
     return <aside>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+        <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
             {posts.map((post: any) => (
-                <div key={post.id}>
-                    <Post postData={post}/>
-                </div>
+                <Post key={post.id} postData={post}/>
             ))}
         </div>
     </aside>

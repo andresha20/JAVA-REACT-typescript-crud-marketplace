@@ -39,11 +39,11 @@ const Navigation: React.FunctionComponent<IAppProps> = ({ color }) => {
                     </div>
                     <div className='font-bold flex space-x-10 items-center'>
                         {menuItems.map((item, i) => (
-                            <p onClick={() => redirectTo(i)} key={i} className={`text-xl cursor-pointer hover:underline transform transition-all hover:scale-105 hover:text-${color} ${(location.pathname == item.name || location.pathname == `${item.name}/`) ? 'text-blue-500 border-b-4 border-blue-500' : 'text-white'}`}>{item.label}</p>
+                            <p onClick={() => redirectTo(i)} key={i} className={`text-xl cursor-pointer transform transition-all hover:scale-105 hover:text-${color} ${(location.pathname == item.name || location.pathname == `${item.name}/`) ? 'text-blue-500 border-b-4 border-blue-500' : 'text-white'}`}>{item.label}</p>
                         ))}
                     </div>
                     <div className=''>
-                        <Button fn={() => redirectTo(2)} color='bg-white' textColor='text-gray-900'>Publicar</Button>
+                        <Button fn={() => redirectTo(2)} color='bg-blue-500' textColor='text-white' hoverColor='hover:bg-white' hoverText='hover:text-gray-900'>Publicar</Button>
                     </div>
                 </div>
             </nav>

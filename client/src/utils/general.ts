@@ -55,4 +55,22 @@ export const filters = [
     { 
         name: "year", label: "Año", options: generateArrayOfYears()
     },
+    { 
+        name: "brand", label: "Marca", options: brands.map((obj, i) => ({ 
+            label: obj.name, 
+            value: i + 1,
+        }))
+    },
+    {
+        name: "model", label: "Modelo", options: []
+    },
+    {
+        name: "exchange", label: "Permuta", options: []
+    },
+    {
+        name: "negotiable", label: "Negociable", options: []
+    },
+    {
+        name: "bulletproof", label: "Blindaje", options: []
+    },
 ]
