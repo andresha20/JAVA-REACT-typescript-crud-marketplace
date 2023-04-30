@@ -18,6 +18,7 @@ import com.ecommerce.ecommerce.models.Post;
 import com.ecommerce.ecommerce.repositories.Posts;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import jakarta.validation.Valid;;
@@ -32,30 +33,35 @@ public class PostsController {
 
     @GetMapping("filter")
     List<Post> index(@RequestParam Map<String, String> params) {
+        List<Post> result = new ArrayList<Post>();
         if (params.entrySet().size() > 0) {
             for (Map.Entry<String, String> entry: params.entrySet()) {
                 String key = entry.getKey();
                 String value = entry.getValue();
                 switch (key) {
                     case "category":
-                        postsRepository.findByCategory(Integer.parseInt(value));
+                        result = postsRepository.findByCategory(Integer.parseInt(value));
                         break;
                     case "condition":
-                        postsRepository.findByCondition(Integer.parseInt(value));
+                        result = postsRepository.findByCondition(Integer.parseInt(value));
                         break;
                     case "year":
-                        postsRepository.findByYear(Integer.parseInt(value));
+                        result = postsRepository.findByYear(Integer.parseInt(value));
                         break;
                     case "brand":
-                        postsRepository.findByBrand(Integer.parseInt(value));
+                        result = postsRepository.findByBrand(Integer.parseInt(value));
+                        break;
+                    case "id":
+                        result = postsRepository.findById(value).stream().toList();;
                         break;
                 
                     default:
+                        result = postsRepository.findAll();
                         break;
                 }
             }
         }
-        return postsRepository.findAll();
+        return result;
     }
 
     @ResponseStatus(HttpStatus.CREATED)

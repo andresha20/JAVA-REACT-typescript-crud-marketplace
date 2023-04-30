@@ -36,7 +36,7 @@ const Catalog = () => {
             <div className='absolute flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 top-1/2 left-1/2 transform w-4/6 -translate-x-1/2 -translate-y-1/2'>
                 {Object.keys(Object.fromEntries(routerQuery)).map((q, i) => (
                     <div onClick={() => removeQuery(q)} title='Quitar filtro' key={i} className='flex justify-between bg-white cursor-pointer hover:text-white transition-all hover:bg-red-500 rounded-lg p-3'>
-                        {(q == "model" || q == "exchange" || q == "negotiable" || "bulletproof")
+                        {(q == "model" || q == "exchange" || q == "negotiable" || q == "bulletproof")
                             ?
                                 <div>
                                     <p className='text-sm'>{filters?.[filters.findIndex(el => el.name == q)]?.label}</p>

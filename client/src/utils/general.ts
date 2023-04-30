@@ -74,3 +74,9 @@ export const filters = [
         name: "bulletproof", label: "Blindaje", options: []
     },
 ]
+
+export const convertToNumericFormat = (number: number) => {
+    let withoutNonNumeric = number.toString().replace(/[^0-9]/g, "");
+    let withCommas = withoutNonNumeric.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return withCommas;
+}

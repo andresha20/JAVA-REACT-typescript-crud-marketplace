@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGauge, faLocationDot, faGasPump } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
+import { convertToNumericFormat } from '../../utils/general';
 
 export interface IAppProps {
     postData?: any,
@@ -21,7 +22,7 @@ const Post: React.FunctionComponent<IAppProps> = ({ postData }) => {
             <div className='relative flex flex-col items-center'>
                 <img src={postData?.imgUrl || '/images/noimage.jpg'} width={500} height={500}/>
                 <p className='bg-opacity-80 text-white p-3 font-bold'>
-                    $ {postData.price}
+                    $ {convertToNumericFormat(postData.price)}
                 </p>
             </div>
             <div>
@@ -29,7 +30,7 @@ const Post: React.FunctionComponent<IAppProps> = ({ postData }) => {
                 <p className='text-center flex-1'>{postData.model}</p>
             </div>
             <div className='text-sm text-gray-500 mt-5 space-y-2 flex-1'>
-                <p><FontAwesomeIcon title='Kilometraje' icon={faGauge} className='h-5 w-5 mr-2'/>{postData.mileage} {postData.mileageType == 2 ? 'millas' : 'KM'}</p>
+                <p><FontAwesomeIcon title='Kilometraje' icon={faGauge} className='h-5 w-5 mr-2'/>{postData.mileage} {postData.mileageType == 2 ? 'millas' : 'kilometros'}</p>
                 <p><FontAwesomeIcon title='Combustible' icon={faGasPump} className='h-5 w-5 mr-2'/>{postData.fuelType == 1 ? 'Gasolina' : (postData.fuelType == 2 ? 'Diesel' : (postData.fuelType == 3 ? 'Eléctrico' : 'Híbrido'))}</p>
                 <p><FontAwesomeIcon title='Combustible' icon={faLocationDot} className='h-5 w-5 mr-2'/>{postData?.location || 'Sin ubicación'}</p>
             </div>

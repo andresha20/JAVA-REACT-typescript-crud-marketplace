@@ -9,6 +9,6 @@ public interface Posts extends MongoRepository<Post, String> {
     public List<Post> findByCategory(Number category);
     public List<Post> findByCondition(Number condition);
     public List<Post> findByYear(Number year);
-    public Post findByBrand(Number brand);
+    public List<Post> findByBrand(Number brand);
 
 }
