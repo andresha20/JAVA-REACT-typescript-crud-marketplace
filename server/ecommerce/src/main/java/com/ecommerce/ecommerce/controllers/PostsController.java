@@ -35,8 +35,12 @@ public class PostsController {
     List<Post> index(@RequestParam Map<String, String> params) {
         List<Post> result = new ArrayList<Post>();
         if (params.entrySet().size() > 0) {
+            System.out.println("ran");
             for (Map.Entry<String, String> entry: params.entrySet()) {
+
                 String key = entry.getKey();
+                System.out.println(key);
+
                 String value = entry.getValue();
                 switch (key) {
                     case "category":
@@ -56,10 +60,13 @@ public class PostsController {
                         break;
                 
                     default:
-                        result = postsRepository.findAll();
                         break;
                 }
             }
+        } else {
+            System.out.println("ran 2");
+
+            return postsRepository.findAll();
         }
         return result;
     }
