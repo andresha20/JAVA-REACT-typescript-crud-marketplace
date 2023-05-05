@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import fetcher from '../utils/fetcher';
 import AnimatedLoading from '../components/global/AnimatedLoading';
 import { convertToNumericFormat, filters } from '../utils/general';
+import Button from '../components/global/Button';
 
 const SingleVehicle = () => {
 
@@ -25,7 +26,8 @@ const SingleVehicle = () => {
             <div>
                 <h1 className='text-blue-500'>{postData.postName}</h1>
                 <p>Año {postData.year} - {postData.model} - {postData?.location || 'Sin ubicación'}</p>
-                <h1 className='font-bold'>${convertToNumericFormat(postData.price)}</h1>
+                <h1 className='font-bold mb-5'>${convertToNumericFormat(postData.price)}</h1>
+                <Button color='bg-green-500'>Contactar</Button>
                 <div className='my-10 space-y-5'>
                     <p className='font-bold text-xl border-b border-gray-400'>Información del vehículo</p>
                     <div className='space-y-2'>

@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
     element: <MainLayout />,
     children: [
       {
-        path: 'upload',
+        path: 'publish',
         element: <Upload />,
       },
       {

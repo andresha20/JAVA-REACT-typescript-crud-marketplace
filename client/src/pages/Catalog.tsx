@@ -26,10 +26,6 @@ const Catalog = () => {
         return navigate(`/catalog?${searchParams}`);
     }
 
-    React.useEffect(() => {
-        console.log(routerQuery.toString())
-    }, [routerQuery])
-
     return <div>
         <Header title='Catálogo'/>
         <div className="bg-black relative h-96 w-full bg-[url('/images/catalog-banner.png')] object-fill bg-fixed bg-auto bg-top bg-no-repeat">

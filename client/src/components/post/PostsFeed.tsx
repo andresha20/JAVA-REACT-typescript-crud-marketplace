@@ -23,11 +23,18 @@ const PostsFeed: React.FC<IAppProps> = ({}) => {
     }
 
     return <aside>
-        <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-            {posts.map((post: any) => (
-                <Post key={post.id} postData={post}/>
-            ))}
-        </div>
+        {posts.length == 0
+            ?
+            <p className='text-sm text-center'>No hay vehículos para mostrar.</p>
+            :
+            <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
+                {
+                    posts.map((post: any) => (
+                        <Post key={post.id} postData={post}/>
+                    ))
+                }
+            </div>
+        }
     </aside>
 }
 

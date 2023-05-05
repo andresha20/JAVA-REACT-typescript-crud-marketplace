@@ -12,10 +12,15 @@ type FormData = {
     exchange: boolean;
     negotiable: boolean;
     bulletproof: boolean;
+    fuelType?: number;
+    transmission?: number;
+    category?: number;
+    year?: number;
 };
 
 const Filter: React.FunctionComponent<IAppProps> = ({ color }) => { 
     const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit,
@@ -47,11 +52,16 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
         Object.keys(properties).map((el) => {
             switch (el) {
                 case 'brand':
+                case 'fuelType':
+                case 'transmission':
+                case 'category':
+                case 'year':
                     params[el] = properties[el];
                     break;
                 case 'model':
                     if (properties[el] == '') {
                         delete properties[el];
+                        setValue(el, '');
                     } else {
                         params[el] = properties[el];
                     }
@@ -61,6 +71,7 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
                 case 'negotiable':
                     if (properties[el] == false) {
                         delete properties[el];
+                        setValue(el, false);
                     } else {
                         params[el] = properties[el];
                     }

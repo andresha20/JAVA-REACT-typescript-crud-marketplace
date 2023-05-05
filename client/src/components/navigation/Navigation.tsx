@@ -35,7 +35,7 @@ const Navigation: React.FunctionComponent<IAppProps> = ({ color }) => {
             <nav className='sticky z-20 select-none top-0 left-0 bg-primary-default w-full shadow-b p-3'>
                 <div className='max-w-screen-xl mx-auto flex justify-between items-center'>
                     <div onClick={() => navigate('/')} className='cursor-pointer rounded-md overflow-hidden'>
-                        <img src='/images/logo.png' height={10} width={150}/>
+                        <img src='/images/logo.png' height={10} width={150} alt='Logo'/>
                     </div>
                     <div className='font-bold flex space-x-10 items-center'>
                         {menuItems.map((item, i) => (
