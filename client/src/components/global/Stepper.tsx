@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Button from './Button';
 
 export interface IAppProps {
     maxIndex: number,
@@ -6,10 +7,13 @@ export interface IAppProps {
     children?: React.ReactNode,
     setIndex: Function,
     activeIndex: number,
-    items: Array<{ name: string, label: string }>
+    items: Array<{ name: string, label: string }>,
+    showButton?: boolean,
+    buttonLabel?: string,
+    isButtonDisabled?: boolean,
 }
 
-const Stepper: React.FunctionComponent<IAppProps> = ({ activeIndex, setIndex, children, maxIndex = 10, startsAt = 0, items }) => {
+const Stepper: React.FunctionComponent<IAppProps> = ({ isButtonDisabled = false, buttonLabel = 'Siguiente', showButton = true, activeIndex, setIndex, children, maxIndex = 10, startsAt = 0, items }) => {
 
   const switchIndex = (action: number, indexOfElement: number) => {
     switch (action) {
@@ -25,13 +29,21 @@ const Stepper: React.FunctionComponent<IAppProps> = ({ activeIndex, setIndex, ch
   }
 
   return <aside>
-      <div className='space-y-2 w-40 sm:space-y-0 sm:flex sm:space-x-3'>
+      <div className='w-full sm:justify-center select-none text-sm mb-10 space-y-2 sm:space-y-0 sm:flex '>
         {items.map((item, i) => (
-          <p key={i} onClick={e => switchIndex(1, i)} className={`${activeIndex == i ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700 cursor-pointer"}`}>{item.label}</p>
+          <p key={i} onClick={e => switchIndex(1, i)} className={`${activeIndex == i ? "bg-blue-500 text-white rounded" : " hover:text-blue-500 font-bold text-gray-700 cursor-pointer"} p-2 transition-all`}>{item.label}</p>
         ))}
       </div>
       <div>
         {children || <>Empty content</>}
+        {showButton &&
+          <div className={`flex ${activeIndex == 0 ? 'justify-end' : 'justify-between'} mt-5`}>
+            {activeIndex > 0 &&
+              <Button color='bg-gray-700'>Volver</Button>
+            }
+            <Button color='bg-blue-500'>{buttonLabel}</Button>
+          </div>
+        }
       </div>
   </aside>
 }
