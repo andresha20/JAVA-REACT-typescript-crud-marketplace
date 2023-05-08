@@ -4,6 +4,15 @@ export const brands = [
     { name: 'Toyota', logo: `/images/toyota.png` },
 ]
 
+export const getYears = () => {
+    const currentDate: Date = new Date();
+    const arrayOfYears = [];
+    for (let i = 1900; i <= currentDate.getFullYear(); i++) {
+        arrayOfYears.push(i);
+    }
+    return arrayOfYears.reverse();
+}
+
 export const menuItems = [
     { label: 'Inicio', name: '/' }, 
     { label: 'Catálogo', name: '/catalog' }
