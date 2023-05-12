@@ -18,6 +18,7 @@ type FormData = {
     negotiable: boolean;
     bulletproof: boolean;
     fuelType?: number;
+    condition?: number;
     transmission?: number;
     category?: number;
     year?: number;
@@ -178,34 +179,34 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
               <div className='space-y-2'>
                 <p className='font-bold'>Transmisión</p>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="negotiable" value="1"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="1"/>
                     <label> Manual</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="negotiable" value="2"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="2"/>
                     <label> Automático</label>
                 </div>  
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="negotiable" value="3"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="3"/>
                     <label> CVT</label>
                 </div>
               </div>
               <div className='space-y-2'>
                 <p className='font-bold'>Tipo de Combustible</p>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="1"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="1"/>
                     <label> Gasolina</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="2"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="2"/>
                     <label> Diesel</label>
                 </div>  
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="3"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="3"/>
                     <label> Eléctrico</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="4"/>
+                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="4"/>
                     <label> Híbrido</label>
                 </div>
               </div>
@@ -224,7 +225,9 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
                 {activeIndex > 0 &&
                   <input value="Volver" onClick={() => setActiveIndex((state: number) => state - 1)} className="cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
                 }
-                <input value="Siguiente" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
+                {formData?.condition && formData?.fuelType && formData?.exchange && formData?.negotiable && formData?.transmission && formData?.bulletproof &&
+                  <input value="Siguiente" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
+                }
               </div>
             </div> 
           }
