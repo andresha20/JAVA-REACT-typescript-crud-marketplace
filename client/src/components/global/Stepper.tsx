@@ -36,14 +36,6 @@ const Stepper: React.FunctionComponent<IAppProps> = ({ isButtonDisabled = false,
       </div>
       <div>
         {children || <>Empty content</>}
-        <div className={`flex ${activeIndex == 0 ? 'justify-end' : 'justify-between'} mt-5`}>
-          {activeIndex > 0 && showButton &&
-            <Button fn={() => setIndex((state: number) => state - 1)} color='bg-gray-700'>Volver</Button>
-          }
-          {!isButtonDisabled &&
-            <Button fn={() => setIndex((state: number) => state + 1)} color='bg-blue-500'>{buttonLabel}</Button>
-          }
-        </div>
       </div>
   </aside>
 }

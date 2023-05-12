@@ -128,7 +128,7 @@ const Filter: React.FunctionComponent<IAppProps> = ({ color }) => {
                 </div>
             </div>
             <div className='flex justify-end'>
-                <input className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit" />
+                <input value="Buscar" className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500" type="submit" />
             </div>
         </form>
     </aside>
