@@ -49,7 +49,8 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
       formState: { errors },
   } = useForm<FormData>({ defaultValues: { negotiable: false, exchange: false, bulletproof: false }});
 
-  const mergeFormData = async () => {
+  const postData = async () => {
+    return false;
     setLoading(true);
     try {
       const response = await fetcher(`http://localhost:3000/api/posts`, {
@@ -112,17 +113,16 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
     <form className='space-y-5 select-none'>
         <Stepper isButtonDisabled={true} maxIndex={steps.length} items={steps} startsAt={0} activeIndex={activeIndex} setIndex={(data: number) => setActiveIndex(data)}>
           {activeIndex == 0 &&
-            <form onSubmit={handleSubmit(() => activeIndex ==  0 ? setActiveIndex(i => i + 1) : mergeFormData())} >
               <div className='space-y-5'>
                   <div className='flex space-x-3'>
                     <div className='w-full'>  
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de la publicación</label>
-                        <input {...register("postName", { required: true, minLength: 5, maxLength: 30 })} value={formData?.postName || ''}  type="text" maxLength={50} id="postName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Vendo por motivo viaje" required/>
+                        <input {...register("postName", { required: true, minLength: 5, maxLength: 30 })} type="text" id="postName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Vendo por motivo viaje" required/>
                         {errors.postName && <ErrorWarning>Nombre de la publicación no debe estar vacío.</ErrorWarning>}
                     </div>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
-                        <input {...register("model", { required: true, minLength: 5, maxLength: 30 })} value={formData?.model || ''} type="text" maxLength={50} id="model" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Land Cruiser Prado" required/>
+                        <input {...register("model", { required: true, minLength: 5, maxLength: 30 })} id="model" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Land Cruiser Prado" required/>
                         {errors.model && <ErrorWarning>Modelo del vehículo no debe estar vacío.</ErrorWarning>}
 
                     </div>
@@ -130,19 +130,19 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
                   <div className='flex space-x-3'>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color del vehículo</label>
-                        <input {...register("color", { required: true, minLength: 5, maxLength: 30 })} value={formData?.color || ''} type="text" maxLength={15} id="color" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Rojo" required/>
+                        <input {...register("color", { required: true, minLength: 5, maxLength: 30 })} type="text" id="color" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Rojo" required/>
                         {errors.color && <ErrorWarning>Color del vehículo no debe estar vacío.</ErrorWarning>}
                     </div>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubicación</label>
-                        <input {...register("location", { required: true, minLength: 5, maxLength: 30 })}  value={formData?.location || ''} type="text" maxLength={50} id="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Medellín" required/>
+                        <input {...register("location", { required: true, minLength: 5, maxLength: 30 })} type="text" id="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Medellín" required/>
                         {errors.location && <ErrorWarning>Ubicación del vehículo no debe estar vacía.</ErrorWarning>}
 
                     </div>
                   </div>
                   <div>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año</label>
-                      <select {...register("year", { required: true })} >
+                      <select {...register("year", { required: true })} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                         {getYears().map((el: any, i: number) => (
                           <option value={i+1} key={i}>{el}</option>
                         ))}
@@ -158,9 +158,9 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
                     }
                   </div>
               </div>
-            </form>
           }
           {activeIndex == 1 &&
+          <form onSubmit={handleSubmit(postData)}>
             <div className='space-y-5'>
               <h2 className='font-bold'>Detalles técnicos</h2>
               <div className='space-y-2'>
@@ -230,11 +230,15 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
                 {activeIndex > 0 &&
                   <input value="Volver" onClick={() => setActiveIndex((state: number) => state - 1)} className="text-center cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
                 }
-                {!errors  && 
+                {Object.keys(errors).length > 0 
+                  ?
+                  <ErrorWarning>Hay errores en el diligenciamiento del formulario.</ErrorWarning>
+                  :
                   <input value="Publicar" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
                 }                    
               </div>
             </div> 
+          </form>
           }
         </Stepper>
     </form>
