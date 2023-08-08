@@ -48,9 +48,7 @@ const CatalogCarousel: React.FunctionComponent<IAppProps> = ({ color }) => {
             <Carousel>
                 {cars.map((car: any, i: number) => (
                     <SwiperSlide key={car.id}>
-                        <div>
-                            <Post postData={car}/>
-                        </div>
+                        <Post postData={car}/>
                     </SwiperSlide>
                 ))}
             </Carousel>

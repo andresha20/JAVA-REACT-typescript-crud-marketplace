@@ -7,6 +7,7 @@ import Button from './Button';
 import Stepper from './Stepper';
 import { getYears } from '../../utils/general';
 import fetcher from '../../utils/fetcher';
+import ErrorWarning from './Error';
 
 type FormData = {
     postName: string | undefined;
@@ -46,7 +47,7 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
       getValues,
       setValue,
       formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({ defaultValues: { negotiable: false, exchange: false, bulletproof: false }});
 
   const mergeFormData = async () => {
     setLoading(true);
@@ -108,50 +109,51 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
   }, [formData])
 
   return <aside>
-    <form className='space-y-5'>
+    <form className='space-y-5 select-none'>
         <Stepper isButtonDisabled={true} maxIndex={steps.length} items={steps} startsAt={0} activeIndex={activeIndex} setIndex={(data: number) => setActiveIndex(data)}>
           {activeIndex == 0 &&
-            <form onSubmit={handleSubmit(() => mergeFormData())} >
+            <form onSubmit={handleSubmit(() => activeIndex ==  0 ? setActiveIndex(i => i + 1) : mergeFormData())} >
               <div className='space-y-5'>
                   <div className='flex space-x-3'>
                     <div className='w-full'>  
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de la publicación</label>
-                        <input value={formData?.postName || ''} onChange={(e) => getInputValue(e)} type="text" maxLength={50} id="postName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Vendo por motivo viaje" required/>
+                        <input {...register("postName", { required: true, minLength: 5, maxLength: 30 })} value={formData?.postName || ''}  type="text" maxLength={50} id="postName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Vendo por motivo viaje" required/>
+                        {errors.postName && <ErrorWarning>Nombre de la publicación no debe estar vacío.</ErrorWarning>}
                     </div>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
-                        <input value={formData?.model || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => getInputValue(e)} type="text" maxLength={50} id="model" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Land Cruiser Prado" required/>
+                        <input {...register("model", { required: true, minLength: 5, maxLength: 30 })} value={formData?.model || ''} type="text" maxLength={50} id="model" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Land Cruiser Prado" required/>
+                        {errors.model && <ErrorWarning>Modelo del vehículo no debe estar vacío.</ErrorWarning>}
+
                     </div>
                   </div>
                   <div className='flex space-x-3'>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color del vehículo</label>
-                        <input value={formData?.color || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => getInputValue(e)} type="text" maxLength={15} id="color" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Rojo" required/>
+                        <input {...register("color", { required: true, minLength: 5, maxLength: 30 })} value={formData?.color || ''} type="text" maxLength={15} id="color" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Rojo" required/>
+                        {errors.color && <ErrorWarning>Color del vehículo no debe estar vacío.</ErrorWarning>}
                     </div>
                     <div className='w-full'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubicación</label>
-                        <input value={formData?.location || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => getInputValue(e)} type="text" maxLength={50} id="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Medellín" required/>
+                        <input {...register("location", { required: true, minLength: 5, maxLength: 30 })}  value={formData?.location || ''} type="text" maxLength={50} id="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ejemplo: Medellín" required/>
+                        {errors.location && <ErrorWarning>Ubicación del vehículo no debe estar vacía.</ErrorWarning>}
+
                     </div>
                   </div>
                   <div>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año</label>
-                      <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                            setFormData({ ...formData, year: parseInt(e.target.value) } as FormData);
-                        }} className="cursor-pointer w-full px-3 py-2 bg-gray-50 border border-gray-3x|00 rounded-md text-sm shadow-sm placeholder-primary-default-400
-                        focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-primary-default
-                        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                        invalid:border-red-700 invalid:text-red-600
-                        focus:invalid:border-red-700 focus:invalid:ring-red-500">
+                      <select {...register("year", { required: true })} >
                         {getYears().map((el: any, i: number) => (
-                            <option value={i+1} key={i}>{el}</option>
+                          <option value={i+1} key={i}>{el}</option>
                         ))}
-                        </select>
+                      </select>
+                      {errors.year && <ErrorWarning>Año del vehículo no debe estar vacío.</ErrorWarning>}
                   </div>
                   <div className={`flex justify-end mt-5`}>
                     {activeIndex > 0 &&
-                      <input onClick={() => setActiveIndex((state: number) => state - 1)} className="cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
+                      <input onClick={() => setActiveIndex((state: number) => state - 1)} className="text-center cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
                     }
-                    {formData?.postName && formData?.model && formData?.color && formData?.year && formData?.location &&
+                    {(!errors.postName && !errors.color && !errors.location && !errors.model) &&
                       <input value="Siguiente" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
                     }
                   </div>
@@ -163,15 +165,15 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
               <h2 className='font-bold'>Detalles técnicos</h2>
               <div className='space-y-2'>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="negotiable" value="1"/>
+                    <input type="checkbox" {...register("negotiable") } value='1' id="demoCheckbox" name="negotiable"/>
                     <label> Negociable</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="exchange" value="2"/>
+                    <input type="checkbox" {...register("exchange") } value='2' id="demoCheckbox" name="exchange"/>
                     <label> Permuta</label>
                 </div>  
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="bulletproof" value="3"/>
+                    <input type="checkbox" {...register("bulletproof") } value='3' id="demoCheckbox" name="bulletproof"/>
                     <label> Blindaje</label>
                 </div>
               </div>
@@ -179,55 +181,58 @@ const UploadForm: React.FunctionComponent<IAppProps> = ({ children }) => {
               <div className='space-y-2'>
                 <p className='font-bold'>Transmisión</p>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="1"/>
+                    <input type="radio" {...register("transmission", { required: true })} id="transmission" name="transmission" value="1"/>
                     <label> Manual</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="2"/>
+                    <input type="radio" {...register("transmission", { required: true })} id="transmission" name="transmission" value="2"/>
                     <label> Automático</label>
                 </div>  
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="transmission" value="3"/>
+                    <input type="radio" {...register("transmission", { required: true })} id="transmission" name="transmission" value="3"/>
                     <label> CVT</label>
                 </div>
+                {errors.transmission && <ErrorWarning>Elige el tipo de transmisión.</ErrorWarning>}
               </div>
               <div className='space-y-2'>
                 <p className='font-bold'>Tipo de Combustible</p>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="1"/>
+                    <input type="radio" {...register("fuelType", { required: true })} id="demoCheckbox" name="fuelType" value="1"/>
                     <label> Gasolina</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="2"/>
+                    <input type="radio" {...register("fuelType", { required: true })} id="demoCheckbox" name="fuelType" value="2"/>
                     <label> Diesel</label>
                 </div>  
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="3"/>
+                    <input type="radio" {...register("fuelType", { required: true })} id="demoCheckbox" name="fuelType" value="3"/>
                     <label> Eléctrico</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="fuelType" value="4"/>
+                    <input type="radio" {...register("fuelType", { required: true })} id="demoCheckbox" name="fuelType" value="4"/>
                     <label> Híbrido</label>
                 </div>
+                {errors.fuelType && <ErrorWarning>Elige el tipo de combustible.</ErrorWarning>}
               </div>
               <div className='space-y-2'>
                 <p className='font-bold'>Condición</p>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="condition" value="1"/>
+                    <input type="radio" id="demoCheckbox" {...register("condition", { required: true })}  name="condition" value="1"/>
                     <label> Usado</label>
                 </div>
                 <div>
-                    <input onChange={(e) => handleCheckbox(e)} type="checkbox" id="demoCheckbox" name="condition" value="2"/>
+                    <input type="radio" id="demoCheckbox" {...register("condition", { required: true })}  name="condition" value="2"/>
                     <label> Nuevo</label>
                 </div>  
+                {errors.condition && <ErrorWarning>Elige la condición.</ErrorWarning>}
               </div>
               <div className={`flex justify-between mt-5`}>
                 {activeIndex > 0 &&
-                  <input value="Volver" onClick={() => setActiveIndex((state: number) => state - 1)} className="cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
+                  <input value="Volver" onClick={() => setActiveIndex((state: number) => state - 1)} className="text-center cursor-pointer rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"/>
                 }
-                {formData?.condition && formData?.fuelType && formData?.exchange && formData?.negotiable && formData?.transmission && formData?.bulletproof &&
-                  <input value="Siguiente" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
-                }
+                {!errors  && 
+                  <input value="Publicar" type='submit' onClick={() => setActiveIndex((state: number) => state + 1)} className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"/>
+                }                    
               </div>
             </div> 
           }
